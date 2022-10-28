@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'queens-8-puzzle'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=queens-8-puzzle",
+                    "--package=queens-8-puzzle"
+                ],
+                "filter": {
+                    "name": "queens-8-puzzle",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'queens-8-puzzle'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=queens-8-puzzle",
+                    "--package=queens-8-puzzle"
+                ],
+                "filter": {
+                    "name": "queens-8-puzzle",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
