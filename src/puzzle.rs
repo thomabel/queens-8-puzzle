@@ -4,7 +4,7 @@ use crate::vector::*;
 
 #[derive(Clone, Copy)]
 pub struct Queen {
-    position: Vector2,
+    pub position: Vector2,
 }
 impl Queen {
     fn new(position: Vector2) -> Queen {
