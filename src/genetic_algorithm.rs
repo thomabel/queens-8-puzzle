@@ -100,7 +100,7 @@ impl GeneticAlgorithm {
     fn choose_parent(&self, p: f32) -> usize {
         let mut cumulative_probability = 0.0;
         for (i, prob) in self.probability.iter().enumerate() {
-            cumulative_probability += prob;
+            cumulative_probability += *prob;
             if p <= cumulative_probability {
                 return i;
             }

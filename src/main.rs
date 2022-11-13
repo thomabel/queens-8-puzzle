@@ -8,7 +8,7 @@ mod vector;
 mod gene;
 mod genetic_algorithm;
 fn main() {
-    experiment();
+    exp_loop();
 }
 
 
@@ -16,12 +16,19 @@ use genetic_algorithm::GeneticAlgorithm;
 use vector::Vector2;
 use plotters::prelude::*;
 
-fn experiment() {
-    let board_size = Vector2::new(8, 8);
-    let population_size = usize::pow(2, 8);
-    let num_iterations = usize::pow(2, 12);
-    let mutate_pct = 0.;
+fn exp_loop() {
+    let mutate_pct = 0.05;
+    for i in 4..=8 {
+        let population_size = usize::pow(2, i);
+        for j in 10..=14 {
+            let num_iterations = usize::pow(2, j);
+            experiment(population_size, num_iterations, mutate_pct);
+        }
+    }
+}
 
+fn experiment(population_size: usize, num_iterations: usize, mutate_pct: f32) {
+    let board_size = Vector2::new(8, 8);
     let mut genetic_alg = GeneticAlgorithm::new(board_size, population_size);
     let result = genetic_alg.run(num_iterations, mutate_pct);
 
@@ -38,13 +45,13 @@ fn experiment() {
 }
 
 // Uses plotters crate to visualize data.
-fn visualize(result: &genetic_algorithm::Result, name: String, caption: String, num_iterations: usize,
-) -> Result<(), Box<dyn std::error::Error>>
+fn visualize(result: &genetic_algorithm::Result, name: String, caption: String, num_iterations: usize)
+    -> Result<(), Box<dyn std::error::Error>>
 {
     let path = format!("./plots/{}.png", name);
     let size = (1290, 720);
     let root = BitMapBackend::new(&path, size).into_drawing_area();
-    let dimension = (0.0..(num_iterations as f32), 0.0..28f32);
+    let dimension = (0.0..(num_iterations as f32), 15f32..28f32);
     let line_color = BLUE;
     root.fill(&WHITE)?;
 
