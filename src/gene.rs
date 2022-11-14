@@ -75,3 +75,23 @@ impl ToString for Gene {
         string
     }
 }
+
+impl Gene {
+    pub fn to_board(&self) -> String {
+        let mut board = String::new();
+        // for each row
+        for i in 0..8 {
+            // check each piece to see if it's in that row
+            for q in self.0.iter() {
+                if *q == i {
+                    board.push_str("-Q-");
+                }
+                else {
+                    board.push_str("|_|");
+                }
+            }
+            board.push('\n');
+        }
+        board
+    }
+}

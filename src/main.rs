@@ -9,6 +9,7 @@ mod gene;
 mod genetic_algorithm;
 fn main() {
     exp_loop();
+    //experiment(256, 1024, 0.01)
 }
 
 
@@ -17,7 +18,7 @@ use vector::Vector2;
 use plotters::prelude::*;
 
 fn exp_loop() {
-    let mutate_pct = 0.05;
+    let mutate_pct = 0.01;
     for i in 4..=8 {
         let population_size = usize::pow(2, i);
         for j in 10..=14 {
@@ -40,6 +41,9 @@ fn experiment(population_size: usize, num_iterations: usize, mutate_pct: f32) {
     let name = format!("Psize{} iter{} mut{:0.3}", population_size, num_iterations, mutate_pct);
     let caption = format!("Pop_size: {:5}  , num_iterations: {:6}  , mutate_pct: {:0.3}", population_size, num_iterations, mutate_pct);
     println!("{}\n# of Solutions: {}", caption, result.correct.len());
+
+    let len = result.sample.len();
+    println!("{}\n\n{}\n\n{}\n\n", result.sample[0].to_board(), result.sample[len/2].to_board(), result.sample[len-1].to_board());
 
     let _r = visualize(&result, name, caption, num_iterations);
 }
